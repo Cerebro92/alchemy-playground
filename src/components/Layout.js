@@ -1,5 +1,5 @@
 import * as React from "react";
-import Box, { BoxProps } from "@mui/joy/Box";
+import Box from "@mui/joy/Box";
 import Sheet from "@mui/joy/Sheet";
 
 const Root = (props) => (
@@ -130,7 +130,7 @@ const SideDrawer = ({ onClose, ...props }) => (
   </Box>
 );
 
-export default {
+const Layouts = {
   Root,
   Header,
   SideNav,
@@ -138,3 +138,5 @@ export default {
   SideDrawer,
   Main,
 };
+
+export default Layouts;

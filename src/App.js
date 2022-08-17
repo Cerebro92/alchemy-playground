@@ -3,27 +3,21 @@ import { GlobalStyles } from "@mui/system";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
-import TextField from "@mui/joy/TextField";
 import IconButton from "@mui/joy/IconButton";
 
 // Icons import
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
-import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import MailRoundedIcon from "@mui/icons-material/MailRounded";
-import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import MenuIcon from "@mui/icons-material/Menu";
-import BookRoundedIcon from "@mui/icons-material/BookRounded";
+import NotStartedRoundedIcon from "@mui/icons-material/NotStartedRounded";
 
 // custom
 import emailTheme from "./theme";
-// import Menu from "./components/Menu";
 import Layout from "./components/Layout";
 import Navigation from "./components/Navigation";
-import Mails from "./components/Mails";
-import EmailContent from "./components/EmailContent";
 import Chart from "./components/Chart";
+import BaseFeeChart from "./components/BaseFeeChart";
+import GasUsedVsLimitRatio from "./components/GasUsedVsLimitRatio";
 
 const ColorSchemeToggle = () => {
   const { mode, setMode } = useColorScheme();
@@ -54,7 +48,14 @@ const ColorSchemeToggle = () => {
 };
 
 export default function EmailExample() {
+  const [chart, setChart] = React.useState(1);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const toggleChart = (number) => {
+    console.log(number);
+    setChart(number);
+  };
+
   return (
     <CssVarsProvider disableTransitionOnChange theme={emailTheme}>
       <GlobalStyles
@@ -67,7 +68,7 @@ export default function EmailExample() {
       />
       {drawerOpen && (
         <Layout.SideDrawer onClose={() => setDrawerOpen(false)}>
-          <Navigation />
+          <Navigation toggleChart={toggleChart} />
         </Layout.SideDrawer>
       )}
       <Layout.Root
@@ -100,61 +101,23 @@ export default function EmailExample() {
               variant="solid"
               sx={{ display: { xs: "none", sm: "inline-flex" } }}
             >
-              <MailRoundedIcon />
+              <NotStartedRoundedIcon />
             </IconButton>
             <Typography component="h1" fontWeight="xl">
-              Email
+              Alchemy Playground
             </Typography>
           </Box>
-          <TextField
-            size="sm"
-            placeholder="Search anything…"
-            startDecorator={<SearchRoundedIcon color="primary" />}
-            endDecorator={
-              <IconButton variant="outlined" size="sm" color="neutral">
-                <Typography
-                  fontWeight="lg"
-                  fontSize="sm"
-                  textColor="text.tertiary"
-                >
-                  /
-                </Typography>
-              </IconButton>
-            }
-            sx={{
-              flexBasis: "500px",
-              display: {
-                xs: "none",
-                sm: "flex",
-              },
-            }}
-          />
           <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5 }}>
-            <IconButton
-              size="sm"
-              variant="outlined"
-              color="primary"
-              sx={{ display: { xs: "inline-flex", sm: "none" } }}
-            >
-              <SearchRoundedIcon />
-            </IconButton>
-            <IconButton
-              size="sm"
-              variant="outlined"
-              color="primary"
-              component="a"
-              href="/blog/first-look-at-joy/"
-            >
-              <BookRoundedIcon />
-            </IconButton>
             <ColorSchemeToggle />
           </Box>
         </Layout.Header>
         <Layout.SideNav>
-          <Navigation />
+          <Navigation toggleChart={toggleChart} />
         </Layout.SideNav>
         <Layout.Main>
-          <Chart />
+          {chart === 1 && <Chart />}
+          {chart === 2 && <BaseFeeChart />}
+          {chart === 3 && <GasUsedVsLimitRatio />}
         </Layout.Main>
       </Layout.Root>
     </CssVarsProvider>

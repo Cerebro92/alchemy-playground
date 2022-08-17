@@ -12,11 +12,15 @@ import ListItemContent from "@mui/joy/ListItemContent";
 import InboxRoundedIcon from "@mui/icons-material/InboxRounded";
 import OutboxRoundedIcon from "@mui/icons-material/OutboxRounded";
 import DraftsRoundedIcon from "@mui/icons-material/DraftsRounded";
-import AssistantPhotoRoundedIcon from "@mui/icons-material/AssistantPhotoRounded";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
-export default function EmailNav() {
+export default function Navigation(props) {
+  const [chartId, setChartId] = React.useState(1);
+  const handleClick = (chartId) => {
+    props.toggleChart(chartId);
+    setChartId(chartId);
+  };
+
   return (
     <List size="sm" sx={{ "--List-item-radius": "8px" }}>
       <ListItem nested sx={{ p: 0 }}>
@@ -56,144 +60,39 @@ export default function EmailNav() {
           }}
         >
           <ListItem>
-            <ListItemButton variant="soft" color="primary">
+            <ListItemButton
+              variant={chartId === 1 ? "soft" : undefined}
+              color={chartId === 1 ? "primary" : undefined}
+              onClick={() => handleClick(1)}
+            >
               <ListItemDecorator sx={{ color: "inherit" }}>
                 <InboxRoundedIcon fontSize="small" />
               </ListItemDecorator>
-              <ListItemContent>Inbox</ListItemContent>
+              <ListItemContent>Transactions Volume</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              variant={chartId === 2 ? "soft" : undefined}
+              color={chartId === 2 ? "primary" : undefined}
+              onClick={() => handleClick(2)}
+            >
               <ListItemDecorator sx={{ color: "neutral.500" }}>
                 <OutboxRoundedIcon fontSize="small" />
               </ListItemDecorator>
-              <ListItemContent>Sent</ListItemContent>
+              <ListItemContent>Base Fees</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              variant={chartId === 3 ? "soft" : undefined}
+              color={chartId === 3 ? "primary" : undefined}
+              onClick={() => handleClick(3)}
+            >
               <ListItemDecorator sx={{ color: "neutral.500" }}>
                 <DraftsRoundedIcon fontSize="small" />
               </ListItemDecorator>
-              <ListItemContent>Draft</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator sx={{ color: "neutral.500" }}>
-                <AssistantPhotoRoundedIcon fontSize="small" />
-              </ListItemDecorator>
-              <ListItemContent>Flagged</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator sx={{ color: "neutral.500" }}>
-                <DeleteRoundedIcon fontSize="small" />
-              </ListItemDecorator>
-              <ListItemContent>Trash</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </ListItem>
-      <ListItem nested>
-        <Box
-          sx={{
-            mt: 2,
-            mb: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography
-            id="nav-list-tags"
-            textColor="neutral.500"
-            fontWeight={700}
-            sx={{
-              fontSize: "10px",
-              textTransform: "uppercase",
-              letterSpacing: ".1rem",
-            }}
-          >
-            Tags
-          </Typography>
-          <IconButton
-            size="sm"
-            variant="plain"
-            color="primary"
-            sx={{ "--IconButton-size": "24px" }}
-          >
-            <KeyboardArrowDownRoundedIcon fontSize="small" color="primary" />
-          </IconButton>
-        </Box>
-        <List
-          aria-labelledby="nav-list-tags"
-          size="sm"
-          sx={{
-            "--List-decorator-size": "32px",
-            "& .JoyListItemButton-root": { p: "8px" },
-          }}
-        >
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <Box
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "99px",
-                    bgcolor: "primary.300",
-                  }}
-                />
-              </ListItemDecorator>
-              <ListItemContent>Personal</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <Box
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "99px",
-                    bgcolor: "danger.300",
-                  }}
-                />
-              </ListItemDecorator>
-              <ListItemContent>Work</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <Box
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "99px",
-                    bgcolor: "warning.200",
-                  }}
-                />
-              </ListItemDecorator>
-              <ListItemContent>Travels</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <Box
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "99px",
-                    bgcolor: "success.300",
-                  }}
-                />
-              </ListItemDecorator>
-              <ListItemContent>Concert tickets</ListItemContent>
+              <ListItemContent>Gas Used vs Limit</ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>
