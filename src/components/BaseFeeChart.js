@@ -57,7 +57,7 @@ export default function BaseFeeChart() {
 
   React.useEffect(() => {
     refreshChart();
-  });
+  }, []);
 
   return (
     <Sheet

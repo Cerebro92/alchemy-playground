@@ -57,7 +57,7 @@ export default function GasUsedVsLimitRatio() {
 
   React.useEffect(() => {
     refreshChart();
-  });
+  }, []);
 
   return (
     <Sheet

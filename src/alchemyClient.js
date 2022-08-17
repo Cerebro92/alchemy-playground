@@ -42,10 +42,10 @@ async function fetchVolume(token) {
 
 async function getBaseFeePerGas() {
   const blocks = await getLast10Blocks();
-  console.log(blocks);
+  // console.log(blocks);
   var baseFees = [];
   for (const block of blocks) {
-    console.log(block);
+    // console.log(block);
     var detail = await alchemy.core.getBlock(block);
     baseFees.push(detail["baseFeePerGas"].toNumber());
   }
